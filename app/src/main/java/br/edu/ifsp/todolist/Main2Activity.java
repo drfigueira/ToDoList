@@ -13,6 +13,7 @@ public class Main2Activity extends AppCompatActivity {
     private EditText editText;
 
     private int position;
+
     private boolean isEditing = false;
 
     @Override

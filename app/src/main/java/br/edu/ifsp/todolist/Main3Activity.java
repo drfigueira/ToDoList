@@ -13,6 +13,8 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import static br.edu.ifsp.todolist.MainActivity.RESULT_EDITING;
+
 public class Main3Activity extends AppCompatActivity {
 
     private static final int TEXT_REQUEST = 1;
@@ -43,7 +45,8 @@ public class Main3Activity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recyclerview2);
         mAdapter = new ToDoItemsAdapter(this, mToDoItems);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayout = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(linearLayout);
     }
 
     @Override
@@ -53,9 +56,19 @@ public class Main3Activity extends AppCompatActivity {
             String result = data.getStringExtra("todoitem");
             int quantity = data.getIntExtra("quantity", -1);
             if (!result.isEmpty() && quantity != -1) {
-                mToDoItems.add(new ToDoItem(result,quantity));
+                mToDoItems.add(new ToDoItem(result, quantity));
                 mRecyclerView.getAdapter().notifyItemInserted(toDoListSize);
                 mRecyclerView.smoothScrollToPosition(toDoListSize);
+            }
+        } else if (resultCode == RESULT_EDITING) {
+            int position = data.getIntExtra("position", -1);
+            String elementName = data.getStringExtra("todoitem");
+            int quantity = data.getIntExtra("quantity", -1);
+            if (position != -1) {
+                mToDoItems.get(position).setName(elementName);
+                mToDoItems.get(position).setQuantity(quantity);
+                mRecyclerView.getAdapter().notifyItemChanged(position);
+                mRecyclerView.smoothScrollToPosition(position);
             }
         }
     }

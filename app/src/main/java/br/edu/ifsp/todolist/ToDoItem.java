@@ -25,6 +25,14 @@ public class ToDoItem implements Parcelable {
         dest.writeInt(quantity);
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public int describeContents() {
         return 0;

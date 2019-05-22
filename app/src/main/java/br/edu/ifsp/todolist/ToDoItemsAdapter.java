@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import static br.edu.ifsp.todolist.Main3Activity.TODO_REQUEST;
+import static br.edu.ifsp.todolist.MainActivity.RESULT_EDITING;
 
 public class ToDoItemsAdapter extends RecyclerView.Adapter<ToDoItemsAdapter.ViewHolder> {
 
@@ -19,12 +20,12 @@ public class ToDoItemsAdapter extends RecyclerView.Adapter<ToDoItemsAdapter.View
 
     private final LayoutInflater mInflater;
 
-    private final Main4Activity context;
+    private final Main3Activity context;
 
     public ToDoItemsAdapter(Context context, ArrayList<ToDoItem> toDoItems) {
         mInflater = LayoutInflater.from(context);
         this.mToDoItems = toDoItems;
-        this.context = (Main4Activity) context;
+        this.context = (Main3Activity) context;
     }
 
     @NonNull
@@ -65,7 +66,7 @@ public class ToDoItemsAdapter extends RecyclerView.Adapter<ToDoItemsAdapter.View
                 intent.putExtra("elementName", elementName);
                 intent.putExtra("quantity", quantity);
                 intent.putExtra("isEditing", true);
-                context.startActivityForResult(intent, TODO_REQUEST);
+                context.startActivityForResult(intent, RESULT_EDITING);
                 return true;
             });
         }

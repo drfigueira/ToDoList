@@ -57,16 +57,16 @@ public class MainActivity extends AppCompatActivity {
                     mRecyclerView.smoothScrollToPosition(toDoListSize);
                 }
             }
-        } else if(resultCode == RESULT_EDITING) {
+        } else if (resultCode == RESULT_EDITING) {
             int position = data.getIntExtra("position", -1);
             String elementName = data.getStringExtra("todo");
             mToDoList.get(position).setName(elementName);
             mRecyclerView.getAdapter().notifyItemChanged(position);
             mRecyclerView.smoothScrollToPosition(position);
         }
-        if (requestCode == TODO_REQUEST) {
+
+        if (resultCode == RESULT_OK && requestCode == TODO_REQUEST) {
             int position = data.getIntExtra("todoposition", -1);
-            System.out.println("LOG");
             if (position != -1) {
                 ArrayList<ToDoItem> mToDoItems = data.getParcelableArrayListExtra("todoitems");
                 mToDoList.get(position).setToDoItems(mToDoItems);
